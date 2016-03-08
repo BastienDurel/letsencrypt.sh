@@ -547,6 +547,8 @@ command_sign_domains() {
   if [[ -n "${PARAM_DOMAIN:-}" ]]; then
     DOMAINS_TXT="$(mktemp -t XXXXXX)"
     printf -- "${PARAM_DOMAIN}" > "${DOMAINS_TXT}"
+  elif [[ ! -z "${DOMAINS_TXT}" && -e "${DOMAINS_TXT}" ]]; then
+    true # keep $DOMAINS_TXT
   elif [[ -e "${BASEDIR}/domains.txt" ]]; then
     DOMAINS_TXT="${BASEDIR}/domains.txt"
   else
